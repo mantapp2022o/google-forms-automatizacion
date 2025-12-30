@@ -7,7 +7,6 @@ concurrency:
 on:
   schedule:
     - cron: "27 20 * * *"
-  workflow_dispatch:
 
 jobs:
   enviar:
