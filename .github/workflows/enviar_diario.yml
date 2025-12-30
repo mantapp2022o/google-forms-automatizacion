@@ -1,5 +1,9 @@
 name: Enviar Google Forms diario
 
+concurrency:
+  group: enviar-forms-diario
+  cancel-in-progress: true
+
 on:
   schedule:
     - cron: "0 14 * * *"
