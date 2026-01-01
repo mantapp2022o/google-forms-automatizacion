@@ -68,5 +68,3 @@ nuevo_inicio = fin if fin < len(tiendas) else 0
 
 with open("estado.txt", "w") as f:
     f.write(str(nuevo_inicio))
-
-print("✅ Envío diario completado")
