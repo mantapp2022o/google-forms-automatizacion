@@ -1,8 +1,10 @@
 import requests
 import time
 
+# URL del Google Form (formResponse)
 url = "https://docs.google.com/forms/d/e/1FAIpQLSc7G4zNjbRYUUA0rDvMxqSYYLIETEfPj6CvH8GkuTsm7ucA_g/formResponse"
 
+# Lista de tiendas (correo, número)
 tiendas = [
     ("asto101@olimpica.com.co", "1101"),
     ("asto102@olimpica.com.co", "1102"),
@@ -37,6 +39,7 @@ tiendas = [
     ("dsto141@olimpica.com.co", "1141"),
 ]
 
+# Actividades (descripción, especialidad)
 actividades = [
     ("Ahorro energético: CPC validación de parametros", "Refrigeración"),
     ("Ahorro energetico: Verificación visual de evaporadores, condensador, puertas y cortinas de los cuartos", "Refrigeración"),
@@ -44,12 +47,27 @@ actividades = [
     ("Ahorro energetico: Revisión de calibración y ajuste de controles de trabajo de compresores", "Eléctrico"),
 ]
 
+# Leer estado actual
 with open("estado.txt", "r") as f:
     inicio = int(f.read().strip())
 
-fin = inicio + 2
+total_tiendas = len(tiendas)
 
-for correo, tienda in tiendas[inicio:fin]:
+print(f"Inicio actual: {inicio}")
+print(f"Total tiendas: {total_tiendas}")
+
+# Seleccionar SIEMPRE 2 tiendas con wrap-around
+bloque_tiendas = []
+for i in range(2):
+    idx = (inicio + i) % total_tiendas
+    bloque_tiendas.append(tiendas[idx])
+
+print("Tiendas a procesar hoy:")
+for _, tienda in bloque_tiendas:
+    print(f"- {tienda}")
+
+# Envío de formularios
+for correo, tienda in bloque_tiendas:
     for descripcion, especialidad in actividades:
         data = {
             "entry.902733400": "Ing Brayan Herazo",
@@ -61,10 +79,16 @@ for correo, tienda in tiendas[inicio:fin]:
             "entry.838636106": "RACK",
             "entry.1908331127": "1"
         }
-        requests.post(url, data=data)
+
+        response = requests.post(url, data=data)
+        print(f"Enviado → Tienda {tienda} | {descripcion} | HTTP {response.status_code}")
+
         time.sleep(21)
 
-nuevo_inicio = fin if fin < len(tiendas) else 0
+# Actualizar estado (avanza 2 posiciones, circular)
+nuevo_inicio = (inicio + 2) % total_tiendas
 
 with open("estado.txt", "w") as f:
     f.write(str(nuevo_inicio))
+
+print(f"Nuevo inicio guardado: {nuevo_inicio}")
