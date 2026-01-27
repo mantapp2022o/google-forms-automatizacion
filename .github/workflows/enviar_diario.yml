@@ -6,7 +6,7 @@ concurrency:
 
 on:
   schedule:
-    - cron: "10 16 * * *"
+    - cron: "0 17 * * *"
 
 jobs:
   enviar:
