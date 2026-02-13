@@ -45,7 +45,11 @@ actividades = [
     ("Ahorro energetico: Verificación visual de evaporadores, condensador, puertas y cortinas de los cuartos", "Refrigeración"),
     ("Ahorro energetico: Revisión de ajustes de borneras y recalentamiento en cableados del sistema electrico del rack", "Eléctrico"),
     ("Ahorro energetico: Revisión de calibración y ajuste de controles de trabajo de compresores", "Eléctrico"),
+    ("Ahorro energetico: Inspección de válvulas de expansión y presostatos", "Refrigeración"),  # NUEVO SERVICIO
 ]
+
+# ⚙️ CONFIGURACIÓN: Cambia este número para ajustar cuántas tiendas procesar por día
+TIENDAS_POR_DIA = 5
 
 # Leer estado actual
 with open("estado.txt", "r") as f:
@@ -55,14 +59,15 @@ total_tiendas = len(tiendas)
 
 print(f"Inicio actual: {inicio}")
 print(f"Total tiendas: {total_tiendas}")
+print(f"Tiendas a procesar por día: {TIENDAS_POR_DIA}")
 
-# Seleccionar SIEMPRE 2 tiendas con wrap-around
+# Seleccionar tiendas con wrap-around
 bloque_tiendas = []
-for i in range(2):
+for i in range(TIENDAS_POR_DIA):
     idx = (inicio + i) % total_tiendas
     bloque_tiendas.append(tiendas[idx])
 
-print("Tiendas a procesar hoy:")
+print("\nTiendas a procesar hoy:")
 for _, tienda in bloque_tiendas:
     print(f"- {tienda}")
 
@@ -79,16 +84,14 @@ for correo, tienda in bloque_tiendas:
             "entry.838636106": "RACK",
             "entry.1908331127": "1"
         }
-
         response = requests.post(url, data=data)
         print(f"Enviado → Tienda {tienda} | {descripcion} | HTTP {response.status_code}")
-
         time.sleep(21)
 
-# Actualizar estado (avanza 2 posiciones, circular)
-nuevo_inicio = (inicio + 2) % total_tiendas
+# Actualizar estado (avanza según TIENDAS_POR_DIA, circular)
+nuevo_inicio = (inicio + TIENDAS_POR_DIA) % total_tiendas
 
 with open("estado.txt", "w") as f:
     f.write(str(nuevo_inicio))
 
-print(f"Nuevo inicio guardado: {nuevo_inicio}")
+print(f"\nNuevo inicio guardado: {nuevo_inicio}")
