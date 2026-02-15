@@ -49,7 +49,7 @@ actividades = [
 ]
 
 # ⚙️ CONFIGURACIÓN: Cambia este número para ajustar cuántas tiendas procesar por día
-TIENDAS_POR_DIA = 5
+TIENDAS_POR_DIA = 3
 
 # Leer estado actual
 with open("estado.txt", "r") as f:
