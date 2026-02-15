@@ -39,17 +39,55 @@ tiendas = [
     ("dsto141@olimpica.com.co", "1141"),
 ]
 
-# Actividades (descripción, especialidad)
-actividades = [
-    ("Ahorro energético: CPC validación de parametros", "Refrigeración"),
-    ("Ahorro energetico: Verificación visual de evaporadores, condensador, puertas y cortinas de los cuartos", "Refrigeración"),
-    ("Ahorro energetico: Revisión de ajustes de borneras y recalentamiento en cableados del sistema electrico del rack", "Eléctrico"),
-    ("Ahorro energetico: Revisión de calibración y ajuste de controles de trabajo de compresores", "Eléctrico"),
-    ("Ahorro energetico: Inspección de válvulas de expansión y presostatos", "Refrigeración"),  # NUEVO SERVICIO
+# ⚙️ SERVICIOS CONFIGURABLES
+# Cada servicio es un diccionario con todos sus valores personalizables
+servicios = [
+    {
+        "descripcion": "Ahorro energético: CPC validación de parametros",
+        "especialidad": "Refrigeración",
+        "area": "CUARTO DE RACK",
+        "equipo": "RACK",
+        "cantidad": "1"
+    },
+    {
+        "descripcion": "Ahorro energetico: Verificación visual de evaporadores, condensador, puertas y cortinas de los cuartos",
+        "especialidad": "Refrigeración",
+        "area": "CUARTO DE RACK",
+        "equipo": "RACK",
+        "cantidad": "1"
+    },
+    {
+        "descripcion": "Ahorro energetico: Revisión de ajustes de borneras y recalentamiento en cableados del sistema electrico del rack",
+        "especialidad": "Eléctrico",
+        "area": "CUARTO DE RACK",
+        "equipo": "RACK",
+        "cantidad": "1"
+    },
+    {
+        "descripcion": "Ahorro energetico: Revisión de calibración y ajuste de controles de trabajo de compresores",
+        "especialidad": "Eléctrico",
+        "area": "CUARTO DE RACK",
+        "equipo": "RACK",
+        "cantidad": "1"
+    },
+    {
+        "descripcion": "Ahorro energetico: Inspección de válvulas de expansión y presostatos",
+        "especialidad": "Refrigeración",
+        "area": "CUARTO DE RACK",
+        "equipo": "RACK",
+        "cantidad": "1"
+    },
+    {
+        "descripcion": "Servicio preventivo: Ascensor Montacargas de recibo",
+        "especialidad": "Metalmecánico",
+        "area": "RECIBO",
+        "equipo": "MONTACARGAS",
+        "cantidad": "2"
+    },
 ]
 
 # ⚙️ CONFIGURACIÓN: Cambia este número para ajustar cuántas tiendas procesar por día
-TIENDAS_POR_DIA = 3
+TIENDAS_POR_DIA = 5
 
 # Leer estado actual
 with open("estado.txt", "r") as f:
@@ -60,6 +98,7 @@ total_tiendas = len(tiendas)
 print(f"Inicio actual: {inicio}")
 print(f"Total tiendas: {total_tiendas}")
 print(f"Tiendas a procesar por día: {TIENDAS_POR_DIA}")
+print(f"Servicios por tienda: {len(servicios)}")
 
 # Seleccionar tiendas con wrap-around
 bloque_tiendas = []
@@ -73,19 +112,19 @@ for _, tienda in bloque_tiendas:
 
 # Envío de formularios
 for correo, tienda in bloque_tiendas:
-    for descripcion, especialidad in actividades:
+    for servicio in servicios:
         data = {
             "entry.902733400": "Ing Brayan Herazo",
             "entry.1898105446": correo,
-            "entry.430365269": descripcion,
+            "entry.430365269": servicio["descripcion"],
             "entry.1509004283": tienda,
-            "entry.1162794890": especialidad,
-            "entry.151546273": "CUARTO DE RACK",
-            "entry.838636106": "RACK",
-            "entry.1908331127": "1"
+            "entry.1162794890": servicio["especialidad"],
+            "entry.151546273": servicio["area"],
+            "entry.838636106": servicio["equipo"],
+            "entry.1908331127": servicio["cantidad"]
         }
         response = requests.post(url, data=data)
-        print(f"Enviado → Tienda {tienda} | {descripcion} | HTTP {response.status_code}")
+        print(f"Enviado → Tienda {tienda} | {servicio['descripcion'][:50]}... | HTTP {response.status_code}")
         time.sleep(21)
 
 # Actualizar estado (avanza según TIENDAS_POR_DIA, circular)
@@ -95,3 +134,4 @@ with open("estado.txt", "w") as f:
     f.write(str(nuevo_inicio))
 
 print(f"\nNuevo inicio guardado: {nuevo_inicio}")
+print(f"Total de envíos realizados: {len(bloque_tiendas) * len(servicios)}")
