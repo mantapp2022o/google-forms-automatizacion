@@ -47,42 +47,42 @@ servicios = [
         "especialidad": "Refrigeración",
         "area": "CUARTO DE RACK",
         "equipo": "RACK",
-        "cantidad": "1"
+        "prioridad": "1"
     },
     {
         "descripcion": "Ahorro energetico: Verificación visual de evaporadores, condensador, puertas y cortinas de los cuartos",
         "especialidad": "Refrigeración",
         "area": "CUARTO DE RACK",
         "equipo": "RACK",
-        "cantidad": "1"
+        "prioridad": "1"
     },
     {
         "descripcion": "Ahorro energetico: Revisión de ajustes de borneras y recalentamiento en cableados del sistema electrico del rack",
         "especialidad": "Eléctrico",
         "area": "CUARTO DE RACK",
         "equipo": "RACK",
-        "cantidad": "1"
+        "prioridad": "1"
     },
     {
         "descripcion": "Ahorro energetico: Revisión de calibración y ajuste de controles de trabajo de compresores",
         "especialidad": "Eléctrico",
         "area": "CUARTO DE RACK",
         "equipo": "RACK",
-        "cantidad": "1"
+        "prioridad": "1"
     },
     {
         "descripcion": "Ahorro energetico: Inspección de válvulas de expansión y presostatos",
         "especialidad": "Refrigeración",
         "area": "CUARTO DE RACK",
         "equipo": "RACK",
-        "cantidad": "1"
+        "prioridad": "1"
     },
     {
         "descripcion": "Servicio preventivo: Ascensor Montacargas de recibo",
         "especialidad": "Metalmecánico",
         "area": "RECIBO",
         "equipo": "MONTACARGAS",
-        "cantidad": "2"
+        "prioridad": "2"
     },
 ]
 
@@ -121,7 +121,7 @@ for correo, tienda in bloque_tiendas:
             "entry.1162794890": servicio["especialidad"],
             "entry.151546273": servicio["area"],
             "entry.838636106": servicio["equipo"],
-            "entry.1908331127": servicio["cantidad"]
+            "entry.1908331127": servicio["prioridad"]
         }
         response = requests.post(url, data=data)
         print(f"Enviado → Tienda {tienda} | {servicio['descripcion'][:50]}... | HTTP {response.status_code}")
