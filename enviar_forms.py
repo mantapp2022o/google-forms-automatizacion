@@ -35,7 +35,7 @@ tiendas = [
     ("dsto129@olimpica.com.co", "1129"),
     ("asto609@olimpica.com.co", "1609"),
     ("asto610@olimpica.com.co", "1610"),
-    ("asdo613@olimpica.com.co", "1613"),
+#   ("asdo613@olimpica.com.co", "1613"),
     ("dsto141@olimpica.com.co", "1141"),
 ]
 
