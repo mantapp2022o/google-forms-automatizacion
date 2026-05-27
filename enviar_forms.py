@@ -125,7 +125,7 @@ for correo, tienda in bloque_tiendas:
         }
         response = requests.post(url, data=data)
         print(f"Enviado → Tienda {tienda} | {servicio['descripcion'][:50]}... | HTTP {response.status_code}")
-        time.sleep(21)
+        time.sleep(30)
 
 # Actualizar estado (avanza según TIENDAS_POR_DIA, circular)
 nuevo_inicio = (inicio + TIENDAS_POR_DIA) % total_tiendas
