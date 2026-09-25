@@ -43,46 +43,39 @@ tiendas = [
 # Cada servicio es un diccionario con todos sus valores personalizables
 servicios = [
     {
-        "descripcion": "Ahorro energético: CPC validación de parametros",
+        "descripcion": "Ajuste de setpoint de neveras en CPC",
         "especialidad": "Refrigeración",
         "area": "CUARTO DE RACK",
         "equipo": "RACK",
         "prioridad": "1"
     },
     {
-        "descripcion": "Ahorro energetico: Verificación visual de evaporadores, condensador, puertas y cortinas de los cuartos",
+        "descripcion": "Verificación visual de evaporadores, condensador, puertas y cortinas de los cuartos",
         "especialidad": "Refrigeración",
         "area": "CUARTO DE RACK",
         "equipo": "RACK",
         "prioridad": "1"
     },
     {
-        "descripcion": "Ahorro energetico: Revisión de ajustes de borneras y recalentamiento en cableados del sistema electrico del rack",
+        "descripcion": "Revisión de ajustes de borneras y recalentamiento en cableados del sistema electrico del rack",
         "especialidad": "Eléctrico",
         "area": "CUARTO DE RACK",
         "equipo": "RACK",
         "prioridad": "1"
     },
     {
-        "descripcion": "Ahorro energetico: Revisión de calibración y ajuste de controles de trabajo de compresores",
+        "descripcion": "Revisión de calibración y ajuste de controles de trabajo de compresores",
         "especialidad": "Eléctrico",
         "area": "CUARTO DE RACK",
         "equipo": "RACK",
         "prioridad": "1"
     },
     {
-        "descripcion": "Ahorro energetico: Inspección de válvulas de expansión y presostatos",
+        "descripcion": "Inspección de válvulas de expansión y presostatos",
         "especialidad": "Refrigeración",
         "area": "CUARTO DE RACK",
         "equipo": "RACK",
         "prioridad": "1"
-    },
-    {
-        "descripcion": "Servicio preventivo: Ascensor Montacargas de recibo",
-        "especialidad": "Metalmecánico",
-        "area": "RECIBO",
-        "equipo": "MONTACARGAS",
-        "prioridad": "2"
     },
 ]
 
