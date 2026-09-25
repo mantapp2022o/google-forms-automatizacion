@@ -107,7 +107,7 @@ for _, tienda in bloque_tiendas:
 for correo, tienda in bloque_tiendas:
     for servicio in servicios:
         data = {
-            "entry.902733400": "Ing Brayan Herazo",
+            "entry.902733400": correo,
             "entry.1898105446": correo,
             "entry.430365269": servicio["descripcion"],
             "entry.1509004283": tienda,
