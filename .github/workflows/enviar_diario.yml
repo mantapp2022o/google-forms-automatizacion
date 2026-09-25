@@ -1,4 +1,4 @@
-name: Enviar Google Forms diario
+name: Enviar Google Forms (martes y jueves)
 
 concurrency:
   group: enviar-forms-diario
@@ -6,7 +6,8 @@ concurrency:
 
 on:
   schedule:
-    - cron: "0 14 * * *"
+    # 14:00 UTC = martes (2) y jueves (4)
+    - cron: "0 14 * * 2,4"
 
 jobs:
   enviar:
@@ -32,5 +33,5 @@ jobs:
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
           git add estado.txt
-          git commit -m "Actualizar estado diario" || echo "Sin cambios"
+          git commit -m "Actualizar estado martes/jueves" || echo "Sin cambios"
           git push
